@@ -1,70 +1,135 @@
-# Getting Started with Create React App
+# 📄 Google Drive File Viewer
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A simple full-stack application that fetches and displays all publicly shared files from a specified Google Drive folder. The backend API is built with PHP, and the frontend is developed using React. While the current implementation previews PDFs, any Google Drive-supported file types (e.g., images, videos, documents) can be previewed as long as a preview URL is available.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+### 🚀 Features
 
-### `npm start`
+- Fetches files from a **public Google Drive folder** using the Drive API.
+- Returns a **JSON** array of file metadata (name + preview URL).
+- Renders each file in an embedded viewer (e.g., PDFs, images, videos).
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### 🛠 Technologies Used
 
-### `npm test`
+- **Backend**: PHP (served with Apache at `localhost:8080`)
+- **Frontend**: React (calls the PHP API using Axios)
+- **Google API**: Google Drive v3 API
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## 🖥️ Setting Up the Local Development Environment
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Follow the steps below to run this project locally on your machine.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 📦 Prerequisites
 
-### `npm run eject`
+- [Node.js & npm](https://nodejs.org/) (for the React frontend)
+- [XAMPP](https://www.apachefriends.org/) or [MAMP](https://www.mamp.info/) (to run Apache + PHP)
+- A modern web browser (e.g., Chrome)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+---
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### 🛠 Step 1: Clone the Repository
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+If you haven't already, clone or download the project to your local machine.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```bash
+git clone https://github.com/Teruk15/google_drive_api.git
+cd google_drive_api
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### 🗂 Step 2: Set Up the PHP API
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+1. Place the `api.php` file inside your Apache directory. Example:
+```bash
+/var/www/html/google_drive_api/api.php
+```
 
-### Code Splitting
+2. Start the **Apache server**. Example:
+```bash
+sudo service apache2 start
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+3. Verify it’s working by opening this URL in your browser (should return and show JSON on browser):
+```bash
+e.g. http://localhost:8080/google_drive_api/api.php
+```
 
-### Analyzing the Bundle Size
+### ⚛️ Step 3: Set Up the React Frontend
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+0. If you are creating new project folder, run the command below:
+```bash
+npx create-react-app your-project
+```
 
-### Making a Progressive Web App
+1. Navigate to the frontend project folder (or create a new one):
+```bash
+cd frontend
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+2. Start the React development server:
+```bash
+npm start
+```
 
-### Advanced Configuration
+3. Open your browser and go to:
+```bash
+http://localhost:3000/
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## 📌 DEMO
 
-### Deployment
+Here is the link being used in the repository.:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+🔗 **Example Drive Folder:**  
+[https://drive.google.com/drive/folders/13adXtGbU3fNzPPfr-aHH-rPeb81BVPsj](https://drive.google.com/drive/folders/13adXtGbU3fNzPPfr-aHH-rPeb81BVPsj)
 
-### `npm run build` fails to minify
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 🔧 Customizing for Your Own Google Drive Folder
+
+To use your own Google Drive folder with this project, follow the steps below:
+
+### 1. 📁 Make Your Drive Folder Public
+
+1. Go to [Google Drive](https://drive.google.com/).
+2. Right-click the folder you want to share and select **"Share"**.
+3. Under **"General access"**, choose **"Anyone with the link"**.
+4. Click **"Copy link"** and note the **Folder ID**. It will look something like this:
+https://drive.google.com/drive/folders/<YOUR_FOLDER_ID>
+
+Copy the part that comes after `/folders/` — that's your **Folder ID**.
+
+---
+
+### 2. 🔑 Get Your Own Google API Key
+
+1. Go to the [Google Cloud Console](https://console.cloud.google.com/).
+2. Create a new project (or select an existing one).
+3. Enable the **Google Drive API**:
+   - Navigate to **APIs & Services > Library**
+   - Search for **Google Drive API**
+   - Click **Enable**
+4. Create credentials:
+   - Go to **APIs & Services > Credentials**
+   - Click **"Create Credentials" > "API key"**
+   - Copy your newly generated **API key**.
+
+---
+
+### 3. ✏️ Update the `api.php` File
+
+Open the `api.php` file in your project and replace the default values with your own:
+
+```php
+$apiKey = "YOUR_NEW_API_KEY";
+$driveFolderID = "YOUR_NEW_FOLDER_ID";
+```
+
+## 📌 License
+
+This project is intended for educational/demo purposes. Replace the API key with your own if deploying publicly.
