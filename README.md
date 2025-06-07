@@ -132,4 +132,4 @@ $driveFolderID = "YOUR_NEW_FOLDER_ID";
 
 ## 📌 License
 
-This project is intended for educational/demo purposes. Replace the API key with your own if deploying publicly.
+This project is intended for demo purposes. Replace the API key with your own if deploying publicly.
