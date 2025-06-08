@@ -72,12 +72,14 @@ npx create-react-app your-project
 cd frontend
 ```
 
-2. Start the React development server:
+2. Copy and paste everything under public and src file to your environment and remove default files.
+
+3. Start the React development server:
 ```bash
 npm start
 ```
 
-3. Open your browser and go to:
+4. Open your browser and go to:
 ```bash
 http://localhost:3000/
 ```
